@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Ирина Петрова](https://up.htmlacademy.ru/javascript-individual/2/user/2628513).
-* Наставник: `Неизвестно`.
+* Студент: [Ирина Петрова ](https://up.htmlacademy.ru/javascript-individual/2/user/2628513).
+* Наставник: [Давид Чачанов ](https://htmlacademy.ru/profile/id2355549).
 
 ---
 
