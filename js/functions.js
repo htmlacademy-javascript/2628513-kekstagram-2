@@ -37,15 +37,15 @@
 // //Zad3
 //-------------------------------
 
-const getNumber = (STRING = '') => console.log(Math.abs(parseInt(STRING.replace(/\D+/g,''),10)));
+// const getNumber = (STRING = '') => console.log(Math.abs(parseInt(STRING.replace(/\D+/g,''),10)));
 // let result = '';
-// const getNumber = (STR) => STR.forEach ((element) => (!Number.isNaN(parseInt(element,10)) === true) ? Math.abs(result += result[element]) : console.log('NaN'));-не получается,после разобрать
+// const getNumber = (STR) => STR.forEach ((element) => (!Number.isNaN(parseInt(element,10)) === true) ? Math.abs(result += result[element]) : console.log('NaN'));//-не получается,после разобрать
 
-getNumber('2023 год');
-getNumber('ECMAScript 2022');
-getNumber('1 кефир, 0.5 батона');
-getNumber('агент 007');
-getNumber('а я томат');
+// getNumber('2023 год');
+// getNumber('ECMAScript 2022');
+// getNumber('1 кефир, 0.5 батона');
+// getNumber('агент 007');
+// getNumber('а я томат');
 
 // const STR3 = STR.forEach ((element) => console.log(parseInt(element,10)));
 
@@ -120,39 +120,59 @@ getNumber('а я томат');
 // } else {
 //   console.log(qualified);
 // }
+//---------------------------------------//
+//Zad4
+//---------------------------------------//
+// Мяу! Допиши за меня конфигуратор. Я создал объект house и задал ему несколько свойств: rooms (количество комнат), floors (этажи), material (материал для стен), coefficient (средняя площадь каждой комнаты).
 
+// Ещё я завёл мапу materialPrice, в которой записал стоимость каждого возможного материала для строительства.
 
-// const materialPrice = {
-//   'wood': 1000,
-//   'stone': 1500,
-//   'brick': 2000
-// };
+// Добавь в объект два метода: calculateSquare, который будет возвращать площадь дома, и calculatePrice, который будет возвращать стоимость строительства.
 
-// const house = {
-//   rooms: 10,
-//   floors: 5,
-//   material: 'wood',
-//   coefficient: 10.5 ,
+// Площадь считай так: умножь количество комнат на коэффициент и число этажей в доме.
 
-//   calculateSquare: function() {
-//     return this.rooms * this.coefficient * this.floors;
+// Цена строительства — произведение площади и стоимости материала дома.
+
+const materialPrice = {
+  'wood': 1000,
+  'stone': 1500,
+  'brick': 2000
+};
+
+const house = {
+  rooms: 10,
+  floors: 5,
+  material: 'stone',
+  coefficient: 10.5 ,
+
+  calculateSquare: function() {
+    return this.rooms * this.coefficient * this.floors;
+  },
+
+  calculatePrice: function() {
+    return this.calculateSquare() * materialPrice[this.material];
+  }
+};
+console.log(house.calculateSquare());
+console.log(house.calculatePrice());
+//---------------------------------------//
+//Zad5
+//---------------------------------------//
+// const films = [
+//   {
+//     id: 0,
+//     title: 'Die hard',
 //   },
+//   {
+//     id: 1,
+//     title: 'Terminator',
+//   },
+// ];
 
-//   calculatePrice: function() {
-//     for(const key in materialPrice) {
-//       if(key === 'wood'){
-//         return this.calculateSquare() * materialPrice[key];
-//       }
-//       if(key === 'stone'){
-//         return this.calculateSquare() * materialPrice[key];
-//       }
-//       if(key === 'brick'){
-//         return this.calculateSquare() * materialPrice[key];
-//       }
-//     }
-//   }
-// };
+// const titles = [];
 
-// console.log(house.calculatePrice('stone'));
-// console.log(house.calculateSquare());
+// films.forEach((film, index) => {
+//   titles[index] = film.title;
+// });
 
+// console.log(titles); // ["Die hard", "Terminator"]

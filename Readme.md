@@ -49,3 +49,20 @@ git clone SSH-адрес_вашего_форка
 <a href="https://htmlacademy.ru/intensive/javascript"><img align="left" width="50" height="50" alt="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/javascript/logo-for-github-2.png"></a>
 
 Репозиторий создан для обучения на интенсивном онлайн‑курсе «[JavaScript. Профессиональная разработка веб-интерфейсов](https://htmlacademy.ru/intensive/javascript)» от [HTML Academy](https://htmlacademy.ru).
+
+--------------------------------------------------------------------------
+// const getRandomСurrentNumber = (min, max) => {
+//   const boxNumber = new Set();
+//   return function() {
+//     let currentNumber = getRandomInteger(min, max);
+//     if(boxNumber.length >= max - min + 1){
+//       return null;
+//     }
+//     while (boxNumber.has(currentNumber)) {
+//       currentNumber = getRandomInteger(min, max);
+//     }
+//     boxNumber.add(currentNumber); //можно добавить только один раз
+
+//     return currentNumber;
+//   };
+// };getGeneratorRandomInteger
