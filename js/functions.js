@@ -14,7 +14,6 @@ const getTimeMinutes = (time) => {
   const [hours, minutes] = time.toString().split(':').map(Number);
   return hours * 60 + minutes;
 };
-// console.log(getTimeMinutes('08:00'));
 
 const getWorkTimeDey = (startTimeDey, endTimeDey, startMeeting, lengthMeeting) => {
 
