@@ -9,26 +9,26 @@
 '14:00' - начало встречи
 90 - продолжительность встречи в минутах */
 
-const getTimeMinutes = (time) => {
-  const [hours, minutes] = time.toString().split(':').map(Number);
-  return hours * 60 + minutes;
-};
+// const getTimeMinutes = (time) => {
+//   const [hours, minutes] = time.toString().split(':').map(Number);
+//   return hours * 60 + minutes;
+// };
 
-const getWorkTimeDey = (startTimeDey, endTimeDey, startMeeting, lengthMeeting) => {
+// const getWorkTimeDey = (startTimeDey, endTimeDey, startMeeting, lengthMeeting) => {
 
-  if((getTimeMinutes(startMeeting) >= getTimeMinutes(startTimeDey)) && (getTimeMinutes(startMeeting) <= getTimeMinutes(endTimeDey))){
-    if(Math.abs(getTimeMinutes(startMeeting) - getTimeMinutes(endTimeDey)) >= lengthMeeting){
-      return console.log('true');
-    } else {
-      return console.log('false');
-    }
-  } else {
-    return console.log('false');
-  }
-};
+//   if((getTimeMinutes(startMeeting) >= getTimeMinutes(startTimeDey)) && (getTimeMinutes(startMeeting) <= getTimeMinutes(endTimeDey))){
+//     if(Math.abs(getTimeMinutes(startMeeting) - getTimeMinutes(endTimeDey)) >= lengthMeeting){
+//       return console.log('true');
+//     } else {
+//       return console.log('false');
+//     }
+//   } else {
+//     return console.log('false');
+//   }
+// };
 
-getWorkTimeDey('08:00', '17:30', '14:00', 90); // true
-getWorkTimeDey('8:0', '10:0', '8:0', 120); // true
-getWorkTimeDey('08:00', '14:30', '14:00', 90); // false
-getWorkTimeDey('14:00', '17:30', '08:0', 90); // false
-getWorkTimeDey('8:00', '17:30', '08:00', 900); // false
+// getWorkTimeDey('08:00', '17:30', '14:00', 90); // true
+// getWorkTimeDey('8:0', '10:0', '8:0', 120); // true
+// getWorkTimeDey('08:00', '14:30', '14:00', 90); // false
+// getWorkTimeDey('14:00', '17:30', '08:0', 90); // false
+// getWorkTimeDey('8:00', '17:30', '08:00', 900); // false
