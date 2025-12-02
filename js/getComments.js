@@ -1,8 +1,9 @@
-import {MESSAGES, NAMES} from './data.js';
+import {getValue} from './data.js';
 import {getRandomArrayElement, getGeneratorRandomInteger} from './getRandomArrayElement.js';
 import {getCounter} from './getCounter.js';
 
 const getCounterCommentId = getCounter();
+const{ MESSAGES, NAMES} = getValue();
 
 const getComments = () => ({
   id: getCounterCommentId(),// не должны повторяться
