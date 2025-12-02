@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import {getPhotos} from './getPhotos.js';
 /*
   <!-- Шаблон изображения случайного пользователя -->
   <template id="picture">
@@ -17,48 +16,46 @@ import {getPhotos} from './getPhotos.js';
 // Количество комментариев comments выведите в блок .picture__comments.
 // Количество лайков likes выведите в блок .picture__likes.
 
-const PHOTO_COUNT = 25;
-const getAllPhotos = () => Array.from({length: PHOTO_COUNT}, getPhotos);
-
-// console.log(getPhotos());
-// console.log(getAllPhotos());
-
 const template = document.querySelector('#picture').content.querySelector('.picture');
-const container = document.querySelector('.pictures');
+const containerPictures = document.querySelector('.pictures');
 
 // Для одной фотографии
 // const photo = getAllPhotos()[24];
 // const image = template.querySelector('.picture__img');
 // image.src = photo.url;
 // image.alt = photo.description;
-// template.querySelector('.picture__comments').textcontent = photo.comments.length;
-// template.querySelector('.picture__likes').textcontent = photo.likes;
+// template.querySelector('.picture__comments').textContent = photo.comments.length;
+// template.querySelector('.picture__likes').textContent = photo.likes;
 // const getAllThumbnails = container.appendChild(template);
 
 const createThumbnail = (photo) => {
+  const {id,url,description,likes,comments} = photo;//деструкторизация
   const thumbnailElement = template.cloneNode(true);
-  const image = thumbnailElement.querySelector('.picture__img');
 
-  image.href = photo.url;
-  image.dataset.id = photo.id;
+  thumbnailElement.dataset.pictureId = id;//важно связь между фото pichtureId
+  thumbnailElement.querySelector('.picture__img').src = url;
+  thumbnailElement.querySelector('.picture__img').alt = description;
 
-  image.src = photo.url;
-  image.alt = photo.description;
-
-  thumbnailElement.querySelector('.picture__comments').textcontent = photo.comments.length;
-  thumbnailElement.querySelector('.picture__likes').textcontent = photo.likes;
+  thumbnailElement.querySelector('.picture__likes').textContent = likes;
+  thumbnailElement.querySelector('.picture__comments').textContent = comments.length;
 
   return thumbnailElement;
 };
 
-const fragment = document.createDocumentFragment();
+const getFragment = (photos) => {
+  const fragment = document.createDocumentFragment();
 
-getAllPhotos().forEach((photo) => {
-  const thumbnailElement = createThumbnail(photo);
-  fragment.appendChild(thumbnailElement);
-});
+  photos.forEach((photoElement) => {
+    const thumbnailElement = createThumbnail(photoElement);
+    fragment.appendChild(thumbnailElement);
+  });
 
-const getThumbnails = container.appendChild(fragment);
+  return containerPictures.appendChild(fragment);
+};
 
-export {getThumbnails};
+const clearInnerHTML = (element) => {
+  element.innerHTML = '';
+};
+
+export {getFragment,clearInnerHTML,containerPictures};
 
