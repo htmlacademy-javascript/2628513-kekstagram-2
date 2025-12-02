@@ -22,24 +22,6 @@ let allComments = [];
 
 const isEscapeKey = (event) => event.key === 'Escape';
 
-const onCommentsLoaderClick = () => {//обработчик загрузки комментариев
-  currentPage++; // Переходим к следующей "странице"
-  displayComments(); // Показываем следующую порцию комментариев
-  checkHideButton(); // После добавления снова проверяем, нужно ли скрыть кнопку
-};
-
-const onBigPictureCancelClick = (event) => {
-  event.preventDefault();
-  closeBigPicture();
-};
-
-const onBigPictureEscKeydown = (event) => {//обработчик события нажатие в модал окно клавиши esc
-  if(isEscapeKey(event)) {
-    event.preventDefault();
-    closeBigPicture();
-  }
-};
-
 const displayComments = () => {
   // Вычисляем, с какого и по какой комментарий показывать
   const startIndex = currentPage * commentsPage;
@@ -67,6 +49,24 @@ const displayComments = () => {
 const checkHideButton = () => { // ф-ия для проверки, нужно ли скрывать кнопку
   if (socialComments.children.length >= allComments.length) {
     commentsLoader.classList.add('hidden');
+  }
+};
+
+const onCommentsLoaderClick = () => {//обработчик загрузки комментариев
+  currentPage++; // Переходим к следующей "странице"
+  displayComments(); // Показываем следующую порцию комментариев
+  checkHideButton(); // После добавления снова проверяем, нужно ли скрыть кнопку
+};
+
+const onBigPictureCancelClick = (event) => {
+  event.preventDefault();
+  closeBigPicture();
+};
+
+const onBigPictureEscKeydown = (event) => {//обработчик события нажатие в модал окно клавиши esc
+  if(isEscapeKey(event)) {
+    event.preventDefault();
+    closeBigPicture();
   }
 };
 
