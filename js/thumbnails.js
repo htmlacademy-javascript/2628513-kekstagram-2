@@ -53,9 +53,5 @@ const getFragment = (photos) => {
   return containerPictures.appendChild(fragment);
 };
 
-const clearInnerHTML = (element) => {
-  element.innerHTML = '';
-};
-
-export {getFragment,clearInnerHTML,containerPictures};
+export {getFragment,containerPictures};
 
