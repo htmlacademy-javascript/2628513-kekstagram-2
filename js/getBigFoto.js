@@ -1,5 +1,11 @@
 /* eslint-disable no-use-before-define */
-import {clearInnerHTML} from './thumbnails.js';
+import {isEscapeKey,clearInnerHTML} from './util.js';
+import {containerPictures} from './thumbnails.js';
+
+
+const commentsPage = 5; // Определенное количество комментариев для загрузки за раз
+let currentPage = 0; // Текущая пачка комментариев
+let allComments = [];
 
 const bigPicture = document.querySelector('.big-picture');//большое фото
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');// крестик на большом фото
@@ -15,12 +21,6 @@ const socialCommentTotalCount = bigPicture.querySelector('.social__comment-total
 const socialComments = bigPicture.querySelector('.social__comments');// блок с комментариями ввиде списка
 const commentsLoader = bigPicture.querySelector('.comments-loader');//кнопка загрузки новых  комментариев
 // const socialCommentCount = bigPicture.querySelector('.social__comment-count');//(не надо)
-
-const commentsPage = 5; // Определенное количество комментариев для загрузки за раз
-let currentPage = 0; // Текущая пачка комментариев
-let allComments = [];
-
-const isEscapeKey = (event) => event.key === 'Escape';
 
 const displayComments = () => {
   // Вычисляем, с какого и по какой комментарий показывать
@@ -121,8 +121,20 @@ const openBigPicture = (arr, pictureId) => {
     // commentsLoader.classList.add('hidden'); // прячем блоки по заданию 8.14
     document.body.classList.add('modal-open');
     bigPictureCancel.addEventListener('click', onBigPictureCancelClick); // повесить обработчик на крестик
-    document.addEventListener('keydown', onBigPictureEscKeydown);//3+ // повесить обработчик на эскейп
+    document.addEventListener('keydown', onBigPictureEscKeydown); // повесить обработчик на эскейп
   }
 };
 
-export {openBigPicture};
+const openBigPictureClick = (arr) => {
+  containerPictures.addEventListener('click', (event) => {
+    const currentPicture = event.target.closest('.picture');
+
+    if(currentPicture) {
+      event.preventDefault();
+      openBigPicture(arr,currentPicture.dataset.pictureId);
+    }
+  });
+};
+
+
+export {openBigPictureClick};

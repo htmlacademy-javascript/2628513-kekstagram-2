@@ -1,3 +1,8 @@
+const getCounter = () => {
+  let firstCounter = 0;
+  return () => (firstCounter += 1);
+};
+
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -14,4 +19,4 @@ const getGeneratorRandomInteger = (min, max) => {
   return currentNumber;
 };
 
-export {getRandomInteger,getRandomArrayElement, getGeneratorRandomInteger};
+export {getCounter, getRandomInteger,getRandomArrayElement, getGeneratorRandomInteger};
