@@ -37,5 +37,4 @@ scaleControlBigger.addEventListener('click', () => {// Обработчик дл
   updateScale();
 });
 
-export {updateScale};
-
+export {updateScale,imgUploadPreview};

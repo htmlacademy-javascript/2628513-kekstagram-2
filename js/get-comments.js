@@ -1,5 +1,5 @@
 import {getValue} from './data.js';
-import {getCounter, getRandomArrayElement, getGeneratorRandomInteger} from './getRandomArrayElement.js';
+import {getCounter, getRandomArrayElement, getGeneratorRandomInteger} from './get-random-array-element.js';
 
 const getCounterCommentId = getCounter();
 const{ MESSAGES, NAMES} = getValue();

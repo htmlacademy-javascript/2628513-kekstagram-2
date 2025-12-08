@@ -1,6 +1,6 @@
 import {getValue} from './data.js';
-import {getCounter, getRandomInteger, getRandomArrayElement, getGeneratorRandomInteger} from './getRandomArrayElement.js';
-import {getComments} from './getComments.js';
+import {getCounter, getRandomInteger, getRandomArrayElement, getGeneratorRandomInteger} from './get-random-array-element.js';
+import {getComments} from './get-comments.js';
 
 const{ DESCRIPTIONS} = getValue();//деструкторизация
 
