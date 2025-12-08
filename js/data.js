@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
-
-
 const getValue = () => {
   const DESCRIPTIONS = [
     'Леонардо да Винчи, «Мона Лиза».',

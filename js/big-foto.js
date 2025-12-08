@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import {isEscapeKey,clearInnerHTML} from './util.js';
 import {containerPictures} from './thumbnails.js';
 
@@ -58,18 +57,6 @@ const onCommentsLoaderClick = () => {//обработчик загрузки к�
   checkHideButton(); // После добавления снова проверяем, нужно ли скрыть кнопку
 };
 
-const onBigPictureCancelClick = (event) => {
-  event.preventDefault();
-  closeBigPicture();
-};
-
-const onBigPictureEscKeydown = (event) => {//обработчик события нажатие в модал окно клавиши esc
-  if(isEscapeKey(event)) {
-    event.preventDefault();
-    closeBigPicture();
-  }
-};
-
 const closeBigPicture = () => {
 
   bigPicture.classList.add('hidden');//+
@@ -80,6 +67,18 @@ const closeBigPicture = () => {
   document.removeEventListener('keydown', onBigPictureEscKeydown);// снять обработчик с эскейпа
   commentsLoader.removeEventListener('click', onCommentsLoaderClick);// удаляем обработчик с кнопки загрузки при закрытии
 };
+
+function onBigPictureCancelClick (event) {
+  event.preventDefault();
+  closeBigPicture();
+}
+
+function onBigPictureEscKeydown (event) {//обработчик события нажатие в модал окно клавиши esc
+  if(isEscapeKey(event)) {
+    event.preventDefault();
+    closeBigPicture();
+  }
+}
 
 const openBigPicture = (arr, pictureId) => {
   const currentPhoto = arr.find((element) => element.id === Number(pictureId));
@@ -135,6 +134,5 @@ const openBigPictureClick = (arr) => {
     }
   });
 };
-
 
 export {openBigPictureClick};

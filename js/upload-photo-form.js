@@ -1,7 +1,6 @@
-/* eslint-disable no-use-before-define */
 import {isEscapeKey} from './util.js';
-import {validateFormat,validateCount,validateUniqueness} from './verifyingHashtags.js';
-import {validateCommentLength} from './verifyingDescription.js';
+import {validateFormat,validateCount,validateUniqueness} from './verifying-hashtags.js';
+import {validateCommentLength} from './verifying-description.js';
 
 
 const uploadForm = document.querySelector('.img-upload__form');//35 Форма поля для загрузки нового изображения на сайт
@@ -14,32 +13,12 @@ const uploadCancel = imgUploadOverlay.querySelector('#upload-cancel');//67 Кн�
 const textHashtags = uploadForm.querySelector('.text__hashtags');//121Добавление хэштегов к изображению
 const textDescription = uploadForm.querySelector('.text__description');//124Добавление комментария к изображению
 
-const onElementCancelClick = (event) => {
-  event.preventDefault();
-  closeElement();
-};
-
-const onElementEscKeydown = (event) => {//обработчик события нажатие в модал окно клавиши esc
-  if(isEscapeKey(event)) {
-    event.preventDefault();
-    if (textHashtags.contains(document.activeElement) || textDescription.contains(document.activeElement)) { // Если фокус в поле хэштегов, то мы НЕ закрываем форму.
-      event.stopPropagation(); // Останавливаем дальнейшее "всплытие" события
-    } else {
-      // Если фокус НЕ в поле хэштегов, тогда закрываем форму.
-      closeElement();
-    }
-  }
-};
-
 const closeElement = () => {
-
   uploadFile.value = '';//обнуляем значение инпута(сбрасывать значение поля)
-
   imgUploadOverlay.classList.add('hidden');//+
   document.body.classList.remove('modal-open');
   uploadCancel.removeEventListener('click', onElementCancelClick); // снять обработчик с кнопки
   document.removeEventListener('keydown', onElementEscKeydown);// снять обработчик с эскейпа
-  uploadFile.value = '';//обнуляем значение инпута(сбрасывать значение поля)
 };
 
 const initUploadModal = () => {
@@ -49,6 +28,24 @@ const initUploadModal = () => {
   uploadCancel.addEventListener('click', onElementCancelClick); // повесить обработчик на кнопку
   document.addEventListener('keydown', onElementEscKeydown); // повесить обработчик на эскейп
 };
+
+function onElementCancelClick (event) {
+  event.preventDefault();
+  closeElement();
+}
+
+function onElementEscKeydown (event) {//обработчик события нажатие в модал окно клавиши esc
+  if(isEscapeKey(event)) {
+    event.preventDefault();
+
+    if (textHashtags.contains(document.activeElement) || textDescription.contains(document.activeElement)) { // Если фокус в поле хэштегов, то мы НЕ закрываем форму.
+      event.stopPropagation(); // Останавливаем дальнейшее "всплытие" события
+    } else {
+      // Если фокус НЕ в поле хэштегов, тогда закрываем форму.
+      closeElement();
+    }
+  }
+}
 
 const initUploadModalChange = () => {
   uploadFile.addEventListener('change', () => {
@@ -102,5 +99,3 @@ uploadForm.addEventListener('submit', (event) => {//обработчик отп�
 });
 
 export {initUploadModalChange};
-
-
