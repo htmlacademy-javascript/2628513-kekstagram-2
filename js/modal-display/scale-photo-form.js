@@ -15,7 +15,6 @@ let currentScale = DEFAULT_SCALE;
 
 const updateScale = () => {
   scaleControlValue.value = `${currentScale}%`;
-  // Важно: применяем transform к image, а не к контейнеру
   image.style.transform = `scale(${currentScale / 100})`;
 };
 
