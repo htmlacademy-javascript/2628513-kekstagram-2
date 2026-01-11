@@ -1,4 +1,3 @@
-// import {getPhotos} from './get-photos.js';
 import {renderThumbnails} from './thumbnails/thumbnails.js';
 import {openBigPictureClick} from './thumbnails/big-photo-thumbnails.js';
 import {configFilter} from './thumbnails/filter-thumbnails.js';
@@ -7,9 +6,9 @@ import {showErrorMessage} from './show-error-message.js';
 import {initUploadModalChange} from './modal-display/upload-form.js';
 import {updateScale} from './modal-display/scale-photo-form.js';
 import {updateEffect} from './modal-display/effect-photo-form.js';
+import {initForm} from './modal-display/submit-notifications-form.js';
 
 import {getData} from './api.js';
-import {initForm} from './modal-display/submit-notifications-form.js';
 
 
 let photos = [];
