@@ -1,16 +1,27 @@
 import { EFFECTS } from '../data.js';
-import { uploadForm,imgUploadPreview, image } from './scale-photo-form.js';
 
 
 const EFFECT_LEVEL_MAX = 100;
 
+const uploadForm = document.querySelector('.img-upload__form');
+const imgUploadPreview = document.querySelector('.img-upload__preview img');
+
 const effectsRadioButtons = uploadForm.querySelectorAll('.effects__radio');
+
 const effectLevelSliderContainer = uploadForm.querySelector('.img-upload__effect-level');
 const effectLevelSlider = uploadForm.querySelector('.effect-level__slider');
 const effectLevelValue = uploadForm.querySelector('.effect-level__value');
 
 let currentEffect = 'none';
 let currentEffectClass = 'effects__preview--none';
+
+const updateEffectPreviews = (imageUrl) => {
+  const uploadPreviewEffects = document.querySelectorAll('.effects__preview');
+  uploadPreviewEffects.forEach((item) => {
+    item.style.backgroundImage = `url(${imageUrl})`;
+  });
+};
+
 
 if (!effectLevelSlider.noUiSlider) {
   noUiSlider.create(effectLevelSlider, {
@@ -26,8 +37,9 @@ if (!effectLevelSlider.noUiSlider) {
 }
 
 const updateEffect = () => {
+
   if (currentEffect === 'none') {
-    image.style.filter = '';
+    imgUploadPreview.style.filter = '';
 
     if (imgUploadPreview.classList.contains(currentEffectClass)) {
       imgUploadPreview.classList.remove(currentEffectClass);
@@ -37,7 +49,8 @@ const updateEffect = () => {
     }
     currentEffectClass = 'effects__preview--none';
 
-    effectLevelSliderContainer.style.display = 'none';
+    effectLevelSliderContainer.classList.add('hidden');
+
     effectLevelValue.value = '';
     return;
   }
@@ -49,7 +62,7 @@ const updateEffect = () => {
   imgUploadPreview.classList.add(newEffectClass);
   currentEffectClass = newEffectClass;
 
-  effectLevelSliderContainer.style.display = 'block';
+  effectLevelSliderContainer.classList.remove('hidden');
 
   effectLevelSlider.noUiSlider.updateOptions({
     range: { min: effectConfig.min, max: effectConfig.max },
@@ -68,7 +81,7 @@ function applyFilter(value) {
   }
   const { style, unit } = EFFECTS[currentEffect];
   const filterString = `${style}(${value}${unit})`;
-  image.style.filter = filterString;
+  imgUploadPreview.style.filter = filterString;
   effectLevelValue.value = value;
 }
 
@@ -83,13 +96,16 @@ effectsRadioButtons.forEach((button) => {
   });
 });
 
-uploadForm.addEventListener('reset', () => {
-  currentEffect = 'none';
-  updateEffect();
+const resetEffects = () => {
+  uploadForm.addEventListener('reset', () => {
+    currentEffect = 'none';
+    updateEffect();
 
-  if (effectLevelSlider.noUiSlider) {
-    effectLevelSlider.noUiSlider.set(EFFECT_LEVEL_MAX);
-  }
-});
+    if (effectLevelSlider.noUiSlider) {
+      effectLevelSlider.noUiSlider.set(EFFECT_LEVEL_MAX);
+    }
+  });
+};
 
-export { updateEffect };
+
+export { updateEffect, resetEffects, updateEffectPreviews };
