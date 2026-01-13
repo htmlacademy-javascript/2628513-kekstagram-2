@@ -5,11 +5,11 @@ let currentPage = 0;
 let allComments = [];
 
 const bigPicture = document.querySelector('.big-picture');
+const socialComments = bigPicture.querySelector('.social__comments');
 
 const socialComment = bigPicture.querySelector('.social__comment');
 const socialCommentShownCount = bigPicture.querySelector('.social__comment-shown-count');
 
-const socialComments = bigPicture.querySelector('.social__comments');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 const socialCommentTotalCount = bigPicture.querySelector('.social__comment-total-count');
 
@@ -64,4 +64,4 @@ const renderComments = (currentPhoto) => {
   checkHideButton();
 };
 
-export {clearComments, renderComments, bigPicture, socialComments};
+export { clearComments, renderComments };

@@ -1,8 +1,10 @@
 import {isEscapeKey,clearInnerHTML} from '../util.js';
 import {containerPictures} from './thumbnails.js';
-import {body} from '../show-error-message.js';
-import {clearComments, renderComments, bigPicture,socialComments} from './render-comments-thumbnails.js';
+import {clearComments, renderComments} from './render-comments-thumbnails.js';
 
+const body = document.querySelector('body');
+const bigPicture = document.querySelector('.big-picture');
+const socialComments = bigPicture.querySelector('.social__comments');
 
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');

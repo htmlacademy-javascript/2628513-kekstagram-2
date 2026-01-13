@@ -8,14 +8,13 @@ const scaleControlSmaller = document.querySelector('.scale__control--smaller');
 const scaleControlBigger = document.querySelector('.scale__control--bigger');
 const scaleControlValue = document.querySelector('.scale__control--value');
 
-const imgUploadPreview = document.querySelector('.img-upload__preview');
-const image = imgUploadPreview.querySelector('img');
+const imgUploadPreview = document.querySelector('.img-upload__preview img');
 
 let currentScale = DEFAULT_SCALE;
 
 const updateScale = () => {
   scaleControlValue.value = `${currentScale}%`;
-  image.style.transform = `scale(${currentScale / 100})`;
+  imgUploadPreview.style.transform = `scale(${currentScale / 100})`;
 };
 
 scaleControlSmaller.addEventListener('click', () => {
@@ -34,9 +33,12 @@ scaleControlBigger.addEventListener('click', () => {
   updateScale();
 });
 
-uploadForm.addEventListener('reset', () => {
-  currentScale = DEFAULT_SCALE;
-  updateScale();
-});
+const scaleControlReset = () => {
+  uploadForm.addEventListener('reset', () => {
+    currentScale = DEFAULT_SCALE;
+    updateScale();
+  });
+};
 
-export { updateScale, uploadForm, imgUploadPreview, image };
+
+export { updateScale, scaleControlReset };

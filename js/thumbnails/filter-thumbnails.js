@@ -1,5 +1,7 @@
-import { renderThumbnails } from './thumbnails';
+import { renderThumbnails } from './thumbnails.js';
 import { debounce } from '../util';
+
+const DEBOUNCE_DELAY = 500;
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 const FILTER = {
   default: 'filter-default',
@@ -7,9 +9,12 @@ const FILTER = {
   discussed:'filter-discussed',
 };
 const filterElement = document.querySelector('.img-filters');
+const filtersForm = document.querySelector('.img-filters__form');
+
 let pictures = [];
 let currentFilter = FILTER.default;
-const debounceRender = debounce(renderThumbnails);
+
+const debounceRender = debounce(renderThumbnails, DEBOUNCE_DELAY);
 
 function onFilterButtonClick(evt) {
   const targetButton = evt.target;
@@ -42,8 +47,8 @@ function applyFilter() {
 }
 
 function configFilter(picturesData) {
-  pictures = picturesData;
+  pictures = [...picturesData];//копируем исходные данные
   filterElement.classList.remove('img-filters--inactive');
-  filterElement.addEventListener('click', onFilterButtonClick);
+  filtersForm.addEventListener('click', onFilterButtonClick);
 }
 export { configFilter };
