@@ -17,28 +17,39 @@ const updateScale = () => {
   imgUploadPreview.style.transform = `scale(${currentScale / 100})`;
 };
 
-scaleControlSmaller.addEventListener('click', () => {
+//Уменьшение масштаба
+const onSmallerButtonClick = () => {
   currentScale -= SCALE_STEP;
   if (currentScale < MIN_SCALE) {
     currentScale = MIN_SCALE;
   }
   updateScale();
-});
+};
 
-scaleControlBigger.addEventListener('click', () => {
+// Увеличение масштаба
+const onBiggerButtonClick = () => {
   currentScale += SCALE_STEP;
   if (currentScale > MAX_SCALE) {
     currentScale = MAX_SCALE;
   }
   updateScale();
-});
+};
 
-const scaleControlReset = () => {
+const resetScale = () => {
   uploadForm.addEventListener('reset', () => {
     currentScale = DEFAULT_SCALE;
     updateScale();
   });
 };
 
+const initUpdateScale = () => {
+  if (scaleControlSmaller && scaleControlBigger) {
+    scaleControlSmaller.removeEventListener('click', onSmallerButtonClick);
+    scaleControlBigger.removeEventListener('click', onBiggerButtonClick);
+    scaleControlSmaller.addEventListener('click', onSmallerButtonClick);
+    scaleControlBigger.addEventListener('click', onBiggerButtonClick);
+  }
+  resetScale();
+};
 
-export { updateScale, scaleControlReset };
+export { initUpdateScale, resetScale };

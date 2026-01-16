@@ -1,5 +1,7 @@
 
 const COUNT_HASHTAG = 5;
+const HASHTAG_REGEX = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+
 const getHashtags = (valueStr) => {
 
   if (!valueStr || !valueStr.trim()) {
@@ -7,8 +9,6 @@ const getHashtags = (valueStr) => {
   }
   return valueStr.trim().split(/\s+/);
 };
-
-const HASHTAG_REGEX = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 const validateFormat = (value) => {
   const hashtags = getHashtags(value);

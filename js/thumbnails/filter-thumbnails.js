@@ -14,23 +14,6 @@ const filtersForm = document.querySelector('.img-filters__form');
 let pictures = [];
 let currentFilter = FILTER.default;
 
-const debounceRender = debounce(renderThumbnails, DEBOUNCE_DELAY);
-
-function onFilterButtonClick(evt) {
-  const targetButton = evt.target;
-  const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
-  if (!targetButton.matches('button')) {
-    return;
-  }
-  if (activeButton === targetButton) {
-    return;
-  }
-  activeButton.classList.toggle(ACTIVE_BUTTON_CLASS);
-  targetButton.classList.toggle(ACTIVE_BUTTON_CLASS);
-  currentFilter = targetButton.getAttribute('id');
-  applyFilter();
-}
-
 function applyFilter() {
   let filteredPictures = [];
   if (currentFilter === FILTER.default) {
@@ -43,11 +26,38 @@ function applyFilter() {
     filteredPictures = pictures.toSorted((a, b) => b.comments.length - a.comments.length);
 
   }
-  debounceRender(filteredPictures);
+
+  // Перерисовываем миниатюры с отфильтрованными данными
+  renderThumbnails(filteredPictures);
+}
+
+const debounceRender = debounce(applyFilter, DEBOUNCE_DELAY);
+
+function onFilterButtonClick(evt) {
+  const targetButton = evt.target;
+
+  const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
+
+  // Проверяем, что клик был по кнопке фильтра
+  if (!targetButton.matches('button')) {
+    return;
+  }
+  // Если кнопка уже активна, ничего не делаем
+  if (activeButton === targetButton) {
+    return;
+  }
+
+  // Обновляем активную кнопку
+  activeButton.classList.toggle(ACTIVE_BUTTON_CLASS);
+  targetButton.classList.toggle(ACTIVE_BUTTON_CLASS);
+  currentFilter = targetButton.getAttribute('id');
+
+  // Применяем фильтр с debounce
+  debounceRender();
 }
 
 function configFilter(picturesData) {
-  pictures = [...picturesData];//копируем исходные данные
+  pictures = [...picturesData];
   filterElement.classList.remove('img-filters--inactive');
   filtersForm.addEventListener('click', onFilterButtonClick);
 }

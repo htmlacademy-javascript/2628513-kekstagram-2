@@ -1,7 +1,7 @@
 import {renderThumbnails} from './thumbnails/thumbnails.js';
 import {openBigPictureClick} from './thumbnails/big-photo-thumbnails.js';
 import {configFilter} from './thumbnails/filter-thumbnails.js';
-import {showErrorMessage} from './show-error-message.js';
+import {showDataErrorMessage} from './show-error-message.js';
 import {getData} from './api.js';
 import {initForm} from './modal-display/form.js';
 
@@ -18,8 +18,7 @@ const bootstrap = () => {
       configFilter(photos);
     })
     .catch(() => {
-      // Показываем сообщение об ошибке
-      showErrorMessage();
+      showDataErrorMessage();
     });
 };
 

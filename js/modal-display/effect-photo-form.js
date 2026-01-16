@@ -15,14 +15,6 @@ const effectLevelValue = uploadForm.querySelector('.effect-level__value');
 let currentEffect = 'none';
 let currentEffectClass = 'effects__preview--none';
 
-const updateEffectPreviews = (imageUrl) => {
-  const uploadPreviewEffects = document.querySelectorAll('.effects__preview');
-  uploadPreviewEffects.forEach((item) => {
-    item.style.backgroundImage = `url(${imageUrl})`;
-  });
-};
-
-
 if (!effectLevelSlider.noUiSlider) {
   noUiSlider.create(effectLevelSlider, {
     range: { min: 0, max: 100 },
@@ -101,9 +93,16 @@ const resetEffects = () => {
     currentEffect = 'none';
     updateEffect();
 
-    if (effectLevelSlider.noUiSlider) {
+    if (effectLevelSlider && effectLevelSlider.noUiSlider) {
       effectLevelSlider.noUiSlider.set(EFFECT_LEVEL_MAX);
     }
+  });
+};
+
+const updateEffectPreviews = (imageUrl) => {
+  const uploadPreviewEffects = document.querySelectorAll('.effects__preview');
+  uploadPreviewEffects.forEach((item) => {
+    item.style.backgroundImage = `url(${imageUrl})`;
   });
 };
 
