@@ -1,17 +1,16 @@
 const REMOVE_MESSAGE_TIMEOUT = 5000;
 
 const body = document.querySelector('body');
-const dataErrorTemplate = document.querySelector('#data-error');
+const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
-// Объявляем функцию closeMessage перед использованием
 function closeMessage(element) {
   element.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
   body.removeEventListener('click', onBodyClick);
 }
 
-// Объявляем обработчики как function declarations
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
@@ -32,6 +31,15 @@ function onBodyClick(evt) {
   }
 }
 
+const showDataErrorMessage = () => {
+  const dataError = dataErrorTemplate.cloneNode(true);
+  body.appendChild(dataError);
+
+  setTimeout(() => {
+    dataError.remove();
+  }, REMOVE_MESSAGE_TIMEOUT);
+};
+
 const showSuccessMessage = () => {
   const success = successTemplate.cloneNode(true);
   body.appendChild(success);
@@ -45,30 +53,17 @@ const showSuccessMessage = () => {
   body.addEventListener('click', onBodyClick);
 };
 
+const showErrorMessage = () => {
+  const error = errorTemplate.cloneNode(true);
+  body.appendChild(error);
 
-const showErrorMessage = (message) => {
-  if (!dataErrorTemplate) {
-    return;
-  }
+  const errorButton = error.querySelector('.error__button');
+  errorButton.addEventListener('click', () => {
+    closeMessage(error);
+  });
 
-  const errorArea = dataErrorTemplate.content.querySelector('.data-error').cloneNode(true);
-
-  if (message) {
-    const titleEl = errorArea.querySelector('.data-error__title');
-    if (titleEl) {
-      titleEl.textContent = message;
-    }
-  }
-
-  body.append(errorArea);
-
-  const errorLoadDataArea = body.querySelector('.data-error');
-
-  setTimeout(() => {
-    if (errorLoadDataArea) {
-      errorLoadDataArea.remove();
-    }
-  }, REMOVE_MESSAGE_TIMEOUT);
+  document.addEventListener('keydown', onDocumentKeydown);
+  body.addEventListener('click', onBodyClick);
 };
 
-export {showErrorMessage, showSuccessMessage};
+export { showErrorMessage, showSuccessMessage, showDataErrorMessage };

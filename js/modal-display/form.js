@@ -2,10 +2,9 @@ import { isEscapeKey } from '../util.js';
 import { validateFormat, validateCount, validateUniqueness } from './verifying-hashtags.js';
 import { validateCommentLength } from './verifying-description.js';
 import { showErrorMessage, showSuccessMessage } from '../show-error-message.js';
-import {updateScale} from './scale-photo-form.js';
-import {updateEffect, updateEffectPreviews} from './effect-photo-form.js';
+import { initUpdateScale, resetScale } from './scale-photo-form.js';
+import { updateEffect, updateEffectPreviews, resetEffects } from './effect-photo-form.js';
 import {sendData} from '../api.js';
-
 
 const FILE_TYPES = ['.jpg', '.jpeg', '.png', '.gif'];
 
@@ -34,9 +33,8 @@ pristine.addValidator(textHashtags, validateUniqueness, 'Хэштеги не д�
 pristine.addValidator(textHashtags, validateCount, 'Нельзя указать больше пяти хэштегов');
 pristine.addValidator(textDescription, validateCommentLength, 'Комментарий слишком длинный');
 
-/**
- * Обработчик нажатия клавиши Escape
- */
+//Обработчик нажатия клавиши Escape
+
 function onElementEscKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -58,9 +56,9 @@ const openUploadModal = () => {
 
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onElementEscKeydown);///////////////////////////////////////////////////!
+  document.addEventListener('keydown', onElementEscKeydown);
 
-  updateScale();
+  initUpdateScale();
   updateEffect();
 };
 
@@ -72,6 +70,10 @@ function closeUploadModal () {
 
   uploadForm.reset();
   pristine.reset();
+
+  resetScale();
+  resetEffects();
+
 
   uploadInput.value = '';
 
@@ -85,9 +87,8 @@ function onCancelButtonClick(evt) {
   closeUploadModal();
 }
 
-/**
- * Обработчик изменения поля выбора файла
- */
+//Обработчик изменения поля выбора файла
+
 function onFileInputChange() {
   const file = uploadInput.files[0];
   const fileName = file.name.toLowerCase();
@@ -114,25 +115,21 @@ function onFileInputChange() {
   }
 }
 
-/**
- * Блокирует кнопку отправки
- */
+
+// Блокирует кнопку отправки
+
 const blockSubmitButton = () => {
   uploadSubmit.disabled = true;
   uploadSubmit.textContent = 'Отправляю...';
 };
 
-/**
- * Разблокирует кнопку отправки
- */
+// Разблокирует кнопку отправки
 const unblockSubmitButton = () => {
   uploadSubmit.disabled = false;
   uploadSubmit.textContent = 'Опубликовать';
 };
 
-/**
- * Обработчик отправки формы
- */
+// Обработчик отправки формы
 const onFormSubmit = (evt) => {
   evt.preventDefault();
 
@@ -166,9 +163,8 @@ const onFormSubmit = (evt) => {
     });
 };
 
-/**
- * Инициализация модуля формы
- */
+// Инициализация модуля формы
+
 const initForm = () => {
   uploadInput.addEventListener('change', onFileInputChange);
   uploadCancel.addEventListener('click', onCancelButtonClick);

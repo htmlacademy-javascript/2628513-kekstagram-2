@@ -36,8 +36,8 @@ function onBigPictureEscKeydown (event) {
   }
 }
 
-const openBigPicture = (arr, pictureId) => {
-  const currentPhoto = arr.find((element) => element.id === Number(pictureId));
+const openBigPicture = (arrays, pictureId) => {
+  const currentPhoto = arrays.find((element) => element.id === Number(pictureId));
   if (currentPhoto) {
     clearInnerHTML(socialComments);
 
@@ -57,13 +57,13 @@ const openBigPicture = (arr, pictureId) => {
   }
 };
 
-const openBigPictureClick = (arr) => {
+const openBigPictureClick = (arrays) => {
   containerPictures.addEventListener('click', (event) => {
     const currentPicture = event.target.closest('.picture');
 
     if(currentPicture) {
       event.preventDefault();
-      openBigPicture(arr,currentPicture.dataset.pictureId);
+      openBigPicture(arrays,currentPicture.dataset.pictureId);
     }
   });
 };
