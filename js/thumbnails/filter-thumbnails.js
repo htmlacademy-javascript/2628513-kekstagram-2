@@ -20,11 +20,10 @@ function applyFilter() {
     filteredPictures = pictures;
   }
   if (currentFilter === FILTER.random) {
-    filteredPictures = pictures.toSorted(() => 0.5 - Math.random()).slice(0, 10);
+    filteredPictures = [...pictures].sort(() => 0.5 - Math.random()).slice(0, 10);
   }
   if (currentFilter === FILTER.discussed) {
-    filteredPictures = pictures.toSorted((a, b) => b.comments.length - a.comments.length);
-
+    filteredPictures = [...pictures].sort((a, b) => b.comments.length - a.comments.length);
   }
 
   // Перерисовываем миниатюры с отфильтрованными данными
@@ -53,7 +52,7 @@ function onFilterButtonClick(evt) {
   currentFilter = targetButton.getAttribute('id');
 
   // Применяем фильтр с debounce
-  debounceRender();
+  debounceRender(targetButton.id);
 }
 
 function configFilter(picturesData) {
