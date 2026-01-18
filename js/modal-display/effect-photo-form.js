@@ -12,6 +12,8 @@ const effectLevelSliderContainer = uploadForm.querySelector('.img-upload__effect
 const effectLevelSlider = uploadForm.querySelector('.effect-level__slider');
 const effectLevelValue = uploadForm.querySelector('.effect-level__value');
 
+const uploadPreviewEffects = document.querySelectorAll('.effects__preview');
+
 let currentEffect = 'none';
 let currentEffectClass = 'effects__preview--none';
 
@@ -89,18 +91,15 @@ effectsRadioButtons.forEach((button) => {
 });
 
 const resetEffects = () => {
-  uploadForm.addEventListener('reset', () => {
-    currentEffect = 'none';
-    updateEffect();
+  currentEffect = 'none';
+  updateEffect();
 
-    if (effectLevelSlider && effectLevelSlider.noUiSlider) {
-      effectLevelSlider.noUiSlider.set(EFFECT_LEVEL_MAX);
-    }
-  });
+  if (effectLevelSlider && effectLevelSlider.noUiSlider) {
+    effectLevelSlider.noUiSlider.set(EFFECT_LEVEL_MAX);
+  }
 };
 
 const updateEffectPreviews = (imageUrl) => {
-  const uploadPreviewEffects = document.querySelectorAll('.effects__preview');
   uploadPreviewEffects.forEach((item) => {
     item.style.backgroundImage = `url(${imageUrl})`;
   });
