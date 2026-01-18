@@ -5,9 +5,6 @@ const dataErrorTemplate = document.querySelector('#data-error').content.querySel
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
-const messageSuccess = document.querySelector('.success');
-const messageError = document.querySelector('.error');
-
 function closeMessage(element) {
   element.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -17,7 +14,7 @@ function closeMessage(element) {
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    const message = (messageSuccess || messageError);
+    const message = document.querySelector('.success') || document.querySelector('.error');
     if (message) {
       closeMessage(message);
     }
@@ -28,7 +25,7 @@ function onBodyClick(evt) {
   if (evt.target.closest('.success__inner') || evt.target.closest('.error__inner')) {
     return;
   }
-  const message = (messageSuccess || messageError);
+  const message = document.querySelector('.success') || document.querySelector('.error');
   if (message) {
     closeMessage(message);
   }
