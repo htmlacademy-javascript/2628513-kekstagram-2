@@ -22,6 +22,9 @@ const textDescription = uploadForm.querySelector('.text__description');
 
 const uploadSubmit = document.querySelector('.img-upload__submit');
 
+const messageSuccess = document.querySelector('.success');
+const messageError = document.querySelector('.error');
+
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
@@ -40,7 +43,7 @@ function onElementEscKeydown(evt) {
     evt.preventDefault();
 
     // Если сообщение  об ошибке или успехе открыто, не закрываем форму (сообщение закроется само)
-    if (document.querySelector('.success') || document.querySelector('.error')) {
+    if (messageSuccess || messageError) {
       return;
     }
 
